@@ -71,6 +71,6 @@ python evaluate_lineage_with_SCLineage.py path/to/your/dataset/test.csv -o
 Output
 The script generates evaluation results, including overall precision and recall, based on the specified dataset. The results will be displayed  and also saved in a file.
 
-## Evaluation Details in Case Study 2
+## Evaluation Details in Case Study 1
 
-For a comprehensive analysis of lineage evaluations and their corresponding results, please refer to **Case Study 2**. This section provides a detailed description of the methodologies employed.
+For a comprehensive analysis of lineage evaluations and their corresponding results, please refer to **Case Study 1**. This section provides a detailed description of the methodologies employed.
