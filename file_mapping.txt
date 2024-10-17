@@ -1,0 +1,4 @@
+CONTRACT_LINEAGES=SCLineagesSet/contract-Level/All-contracts-lineages.csv
+OPEN_SOURCE_CONTRACTS=SCLineagesSet/contract-Level/Open-source-contract-lineages.csv
+SOLIDITY_FILES=SCLineagesSet/files-level/solidity_files_in_open_source_contract.csv
+SOLIDITY_PAIR=SCLineagesSet/files-level/files-predecessor-successor.csv

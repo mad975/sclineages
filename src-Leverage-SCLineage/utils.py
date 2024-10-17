@@ -4,7 +4,7 @@ import logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
-# Constants for file paths
+
 CONTRACT_LINEAGES_PATH = '../SCLineagesSet/contract-Level/All-contracts-lineages.csv'
 OPEN_SOURCE_CONTRACTS_PATH = '../SCLineagesSet/contract-Level/Open-source-contract-lineages.csv'
 
@@ -42,7 +42,7 @@ def get_lineages_of_contract(contract_address, use_open_source=False):
 
 
 
-#  create lineages according to F2
+
 def create_lineages_f2(filtered_f2):
     if 'contract' not in filtered_f2.columns or 'member-of-it-lineage' not in filtered_f2.columns:
         raise KeyError("Expected columns not found in filtered_f2 DataFrame.")
@@ -51,30 +51,30 @@ def create_lineages_f2(filtered_f2):
     for contract in filtered_f2['contract'].unique():
         lineage = filtered_f2[filtered_f2['contract'] == contract]['member-of-it-lineage'].unique().tolist()
         if contract in lineage:
-            lineage.remove(contract)  # Exclude the contract identifying the lineage
+            lineage.remove(contract)  
         lineages_f2[contract] = lineage
         logging.debug(f"F2, contract: {contract}, lineage: {lineage}")
     return lineages_f2
 
-# Function to create lineages according to SCL p5
+
 def create_lineages_ground_truth(p5):
     lineages_GT = {}
-    for contract in p5['contract_address'].unique():  # Ensure 'contract_address' exists in the P5 dataset
-        proxy = p5[p5['contract_address'] == contract]['proxy'].values[0]  # Extract the single proxy value
+    for contract in p5['contract_address'].unique():  
+        proxy = p5[p5['contract_address'] == contract]['proxy'].values[0]  
         contracts = p5[p5['proxy'] == proxy]['contract_address'].unique().tolist()
-        lineage = [c for c in contracts if c != contract]  # Exclude the contract identifying the lineage
+        lineage = [c for c in contracts if c != contract]  #
         lineages_GT[contract] = lineage
         logging.debug(f"Ground truth, contract: {contract}, lineage: {lineage}")
     return lineages_GT
 
-# Function to compare lineages for an individual contract
+
 def compare_lineages_for_contract(lineage_GT, lineage_f2):
     tp = sum(1 for c in lineage_f2 if c in lineage_GT)  # True Positives
     fp = sum(1 for c in lineage_f2 if c not in lineage_GT)  # False Positives
     fn = sum(1 for c in lineage_GT if c not in lineage_f2)  # False Negatives
     return tp, fp, fn
 
-# Function to compare lineages and save results
+
 def compare_lineages_and_save_results(p5, filtered_f2, output_file):
     # Create lineages from P5 and F2
     lineages_GT = create_lineages_ground_truth(p5)
@@ -86,22 +86,17 @@ def compare_lineages_and_save_results(p5, filtered_f2, output_file):
     total_fp = 0
     total_fn = 0
 
-    # Iterate through each contract in P5 and compare with F2
+
     for contract, lineage_GT in lineages_GT.items():
         lineage_f2 = lineages_f2.get(contract, [])
         
-        # Compare lineages for this specific contract
         tp, fp, fn = compare_lineages_for_contract(lineage_GT, lineage_f2)
-
-        # Accumulate totals
         total_tp += tp
         total_fp += fp
         total_fn += fn
-        
-        # Log results including lineages
+    
         logging.info(f"Contract: {contract}, Lineage GT: {lineage_GT}, Lineage F2: {lineage_f2}, TP: {tp}, FP: {fp}, FN: {fn}")
 
-        # Store results for this contract (TP, FP, FN)
         contract_results.append({
             'contract': contract,
             'TP': tp,
@@ -109,11 +104,10 @@ def compare_lineages_and_save_results(p5, filtered_f2, output_file):
             'FN': fn
         })
 
-    # Calculate overall precision and recall for all contracts
     overall_precision = (total_tp / (total_tp + total_fp)) * 100 if (total_tp + total_fp) > 0 else 0.0
     overall_recall = (total_tp / (total_tp + total_fn)) * 100 if (total_tp + total_fn) > 0 else 0.0
 
-    # Add overall metrics to the contract results for reference
+
     contract_results.append({
         'contract': 'Overall',
         'TP': total_tp,
@@ -123,12 +117,12 @@ def compare_lineages_and_save_results(p5, filtered_f2, output_file):
         'recall': overall_recall
     })
 
-    # Save the results to a CSV file
+
     save_results_to_csv(contract_results, output_file)
 
     return overall_precision, overall_recall, contract_results
 
-# Function to save results to a CSV file
+
 def save_results_to_csv(results, filename):
     df = pd.DataFrame(results)
     df.to_csv(filename, index=False)

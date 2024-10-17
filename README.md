@@ -16,8 +16,22 @@ The relationships between these datasets are as follows:
 - **Case Study 2** is represented in the repository by **Case-study-2-Big-vul-SC**.
 
 ## Repository Structure
-
 - **`SCLineagesSet/`**: This directory contains datasets related to contract lineages, structured across three levels:
+sclineages/
+├── SCLineagesSet/
+│   ├── contract-Level/
+│   │   ├── All-contracts-lineages.csv
+│   │   └── Open-source-contract-lineages.csv
+│   ├── files-level/
+│   │   ├── files-predecessor-successor.csv
+│   │   └── solidity_files_in_open_source_contract.csv
+│   ├── functions-level/
+│   │   └── functions-predecessor-successor.csv.csv
+│   └── sample-contracts-dumps/
+│       ├── 0x70f5550dd9630bbcc96faf9f47f71d99267eec0a-LostSocksGenesisV2/
+│       │ 
+│       └── 0x73f684ed287163f7748bb200bd14a2be57c80fb6-LostSocksGenesisV3/
+│   
   - **`contract-Level/`**: Datasets containing information at the smart contract level.
     - `All-contracts-lineages.csv`: This dataset contains all contract lineages. Contracts with the same `proxy` value belong to the same lineage (versions of the same contract).
     - `Open-source-contract-lineages.csv`: This dataset contains only the open-source lineages contracts.
@@ -62,10 +76,10 @@ By default, the script will evaluate all contract lineages using the `All-contra
 To evaluate a dataset (`test.csv`) with the default `CONTRACT_LINEAGES_PATH`, run the following:
 
 ```bash
-python evaluate_lineage_with_SCLineage.py test.csv
+python src-Leverage-Sc-Lineage/evaluate_lineage_with_SCLineage.py test.csv
 ```
  To evaluate using the OPEN_SOURCE_CONTRACTS_PATH, add the -o flag:
-```bas
+```bash
 python evaluate_lineage_with_SCLineage.py path/to/your/dataset/test.csv -o
 ```
 Output
@@ -74,3 +88,11 @@ The script generates evaluation results, including overall precision and recall,
 ## Evaluation Details in Case Study 1
 
 For a comprehensive analysis of lineage evaluations and their corresponding results, please refer to **Case Study 1**. This section provides a detailed description of the methodologies employed.
+
+
+## Reproduce Paper Content
+To reproduce the metrics presented in Table 1 of the paper run the following command:
+```bash
+python src-reproduce-papers-contents/TABLE-I/reproduce.py
+```
+After running the command, the results will be displayed and also will be saved in the Tsrc-reproduce-papers-contents/TABLE-I/r directory with a filename format like result_YYYY-MM-DD.csv, where YYYY-MM-DD corresponds to the current date. You can view the results directly in this CSV file.
