@@ -17,21 +17,6 @@ The relationships between these datasets are as follows:
 
 ## Repository Structure
 - **`SCLineagesSet/`**: This directory contains datasets related to contract lineages, structured across three levels:
-sclineages/
-├── SCLineagesSet/
-│   ├── contract-Level/
-│   │   ├── All-contracts-lineages.csv
-│   │   └── Open-source-contract-lineages.csv
-│   ├── files-level/
-│   │   ├── files-predecessor-successor.csv
-│   │   └── solidity_files_in_open_source_contract.csv
-│   ├── functions-level/
-│   │   └── functions-predecessor-successor.csv.csv
-│   └── sample-contracts-dumps/
-│       ├── 0x70f5550dd9630bbcc96faf9f47f71d99267eec0a-LostSocksGenesisV2/
-│       │ 
-│       └── 0x73f684ed287163f7748bb200bd14a2be57c80fb6-LostSocksGenesisV3/
-│   
   - **`contract-Level/`**: Datasets containing information at the smart contract level.
     - `All-contracts-lineages.csv`: This dataset contains all contract lineages. Contracts with the same `proxy` value belong to the same lineage (versions of the same contract).
     - `Open-source-contract-lineages.csv`: This dataset contains only the open-source lineages contracts.
