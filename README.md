@@ -76,8 +76,31 @@ For a comprehensive analysis of lineage evaluations and their corresponding resu
 
 
 ## Reproduce Paper Content
-To reproduce the metrics presented in Table 1 of the paper run the following command:
+### To reproduce the metrics presented in Table 1 of the paper run the following command:
 ```bash
 python src-reproduce-papers-contents/TABLE-I/reproduce.py
 ```
 After running the command, the results will be displayed and also will be saved in the Tsrc-reproduce-papers-contents/TABLE-I/r directory with a filename format like result_YYYY-MM-DD.csv, where YYYY-MM-DD corresponds to the current date. You can view the results directly in this CSV file.
+
+### to reprduce result of case study 1
+```bash
+cd src-reproduce-papers-contents/Algorithm-1
+```
+```bash
+python step2.py 
+```
+#### Output
+**similarContracts.csv:** This file will contain the scraped data of similar contracts with the following columns:
+
+contractsIn: the contract in the data source
+simiContract: The similar contract found on Etherscan.
+level: The similarity level between the contracts.
+
+This is how we get the file in 
+**Case-study-1-LSH-model-evalution/LSH-similarity-crawled-contracts-output/LSH-similar-all-levels-all-contracts.csv**
+The file in 
+**Case-study-1-LSH-model-evalution/LSH-similarity-crawled-contracts-output/LSH-similar-all-levels-open-source-contracts.csv** is derived from 
+**Case-study-1-LSH-model-evalution/LSH-similarity-crawled-contracts-output/LSH-similar-all-levels-all-contracts.csv** by targetting thoose having open source contractsIn
+for [more details in src-reproduce-papers-contents/Algorithm-1/reproduce.md](src-reproduce-papers-contents/Algorithm-1/reproduce.md)
+
+

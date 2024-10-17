@@ -1,0 +1,9 @@
+requests
+beautifulsoup4
+lxm
+csv
+logging
+time
+platform
+datetime
+bs4
