@@ -101,6 +101,6 @@ This is how we get the file in
 The file in 
 **Case-study-1-LSH-model-evalution/LSH-similarity-crawled-contracts-output/LSH-similar-all-levels-open-source-contracts.csv** is derived from 
 **Case-study-1-LSH-model-evalution/LSH-similarity-crawled-contracts-output/LSH-similar-all-levels-all-contracts.csv** by targetting thoose having open source contractsIn
-for [more details in src-reproduce-papers-contents/Algorithm-1/reproduce.md](src-reproduce-papers-contents/Algorithm-1/reproduce.md)
+for [more details in src-reproduce-papers-contents/reproduce.md](src-reproduce-papers-contents/Algorithm-1/reproduce.md)
 
 
